@@ -8,4 +8,10 @@ class Project(Base):
     name = Column(String(120), nullable=False)
     description = Column(Text, nullable=True)
     owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
-    owner = relationship("User")
+    owner = relationship("User", back_populates="projects")
+    tasks = relationship(
+        "Task",
+        back_populates="project",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )

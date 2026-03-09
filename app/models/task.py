@@ -14,4 +14,4 @@ class Task(Base):
         nullable=False,
         index=True,
     )
-    project = relationship("Project")
+    project = relationship("Project", back_populates="tasks")
