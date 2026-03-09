@@ -1,23 +1,18 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-
-from core.config import settings
+from app.config import settings
 
 engine = None
 engine_init_error = None
 SessionLocal = sessionmaker(autocommit=False, autoflush=False)
-
 Base = declarative_base()
-
 
 def get_engine():
     global engine, engine_init_error
-
     if engine is not None:
         return engine
     if engine_init_error is not None:
         raise engine_init_error
-
     try:
         engine = create_engine(settings.DATABASE_URL)
         return engine
@@ -28,8 +23,6 @@ def get_engine():
         )
         raise engine_init_error from exc
 
-
-# Dependency to get DB session
 def get_db():
     db = SessionLocal(bind=get_engine())
     try:

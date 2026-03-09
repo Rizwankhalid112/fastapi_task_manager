@@ -1,11 +1,7 @@
 from fastapi import FastAPI
-from app.routes import auth_routes
-
+from app.api import auth_api
 app = FastAPI(title="Secure Task Management API")
-
-# Include the authentication routes
-app.include_router(auth_routes.router)
-
+app.include_router(auth_api.router)
 @app.get("/")
 def root():
     return {"message": "Task Manager API Running"}
