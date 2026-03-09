@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database.connection import get_db
-from app.dependencies.get_current_user import get_current_user
+from app.utils.get_current_user import get_current_user
 from app.models.user import User
 from app.schemas.project_schema import ProjectCreate, ProjectResponse
 from app.services.project_services import (
