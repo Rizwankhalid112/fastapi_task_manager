@@ -1,12 +1,10 @@
 import pytest
 from fastapi import HTTPException
-
 from app.models.user import User
 from app.schemas.user_schema import UserCreate, UserUpdate
 from app.services.user_services import authenticate_user, register_user, update_profile
 from app.utils.password_handler import PasswordHandler
 from tests.factories import DEFAULT_PASSWORD
-
 
 @pytest.mark.integration
 class TestUserServices:
@@ -29,7 +27,6 @@ class TestUserServices:
         db_session.add(user)
         await db_session.commit()
         await db_session.refresh(user)
-
         authenticated = await authenticate_user(db_session, email=user.email, password=DEFAULT_PASSWORD)
         assert authenticated is not None
         assert authenticated.id == user.id
@@ -48,8 +45,6 @@ class TestUserServices:
         db_session.add_all([user, other])
         await db_session.commit()
         await db_session.refresh(user)
-
         with pytest.raises(HTTPException) as exc:
             await update_profile(db_session, current_user=user, profile_data=UserUpdate(email=other.email))
-
         assert exc.value.status_code == 409

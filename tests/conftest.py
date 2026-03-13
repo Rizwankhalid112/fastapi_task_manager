@@ -40,7 +40,7 @@ async def _ensure_database_exists() -> None:
         user=parsed.username,
         password=parsed.password,
         host=parsed.hostname,
-        port=parsed.port or 5432,
+        port=parsed.port,
         database=admin_db,
     )
     try:
@@ -284,6 +284,7 @@ def invalid_project_payload(request):
     payloads = {
         "empty_name": {"name": "", "description": "Desc"},
         "too_long_name": {"name": "A" * 121, "description": "Desc"},
+        "too_long_description": {"name": "Valid Name", "description": "D" * 2001},
     }
     return payloads[request.param]
 
@@ -296,6 +297,7 @@ def invalid_task_payload(request):
     payloads = {
         "empty_title": {"title": "", "description": "Desc"},
         "too_long_title": {"title": "T" * 201, "description": "Desc"},
+        "too_long_description": {"title": "Valid Title", "description": "D" * 2001},
     }
     return payloads[request.param]
 

@@ -20,14 +20,31 @@ class TestProjectsSuccess:
         response = await client.delete(f"/api/projects/{user_project.id}", headers=auth_headers)
         assert response.status_code == 204
 
+    async def test_list_projects_returns_empty_list_when_none(self, client, auth_headers):
+        response = await client.get("/api/projects", headers=auth_headers)
+        assert response.status_code == 200
+        assert response.json() == []
+
 @pytest.mark.api
 class TestProjectsValidation:
-    @pytest.mark.parametrize("invalid_project_payload", ["empty_name", "too_long_name"], indirect=True)
+    @pytest.mark.parametrize(
+        "invalid_project_payload",
+        ["empty_name", "too_long_name", "too_long_description"],
+        indirect=True,
+    )
     async def test_create_project_returns_422(
         self, client, auth_headers, invalid_project_payload
     ):
         payload = invalid_project_payload
         response = await client.post("/api/projects", json=payload, headers=auth_headers)
+        assert response.status_code == 422
+
+    async def test_get_project_with_non_int_id_returns_422(self, client, auth_headers):
+        response = await client.get("/api/projects/not-an-int", headers=auth_headers)
+        assert response.status_code == 422
+
+    async def test_delete_project_with_non_int_id_returns_422(self, client, auth_headers):
+        response = await client.delete("/api/projects/not-an-int", headers=auth_headers)
         assert response.status_code == 422
 
 @pytest.mark.api
@@ -38,6 +55,14 @@ class TestProjectsUnauthorized:
         assert response.status_code == 401
     async def test_list_projects_without_auth_returns_401(self, client):
         response = await client.get("/api/projects")
+        assert response.status_code == 401
+
+    async def test_get_project_without_auth_returns_401(self, client, user_project):
+        response = await client.get(f"/api/projects/{user_project.id}")
+        assert response.status_code == 401
+
+    async def test_delete_project_without_auth_returns_401(self, client, user_project):
+        response = await client.delete(f"/api/projects/{user_project.id}")
         assert response.status_code == 401
 
 @pytest.mark.api

@@ -8,6 +8,19 @@ class TestProfileSuccess:
         payload = update_profile_payload
         response = await client.patch("/users/me", json=payload, headers=auth_headers)
         assert response.status_code == 200
+        assert response.json()["full_name"] == payload["full_name"]
+
+    async def test_update_profile_allows_empty_payload(self, client, auth_headers, user):
+        response = await client.patch("/users/me", json={}, headers=auth_headers)
+        assert response.status_code == 200
+        assert response.json()["email"] == user.email
+        assert response.json()["full_name"] == user.full_name
+
+    async def test_update_profile_normalizes_email(self, client, auth_headers):
+        payload = {"email": "NEW.EMAIL@EXAMPLE.COM"}
+        response = await client.patch("/users/me", json=payload, headers=auth_headers)
+        assert response.status_code == 200
+        assert response.json()["email"] == "new.email@example.com"
 
 @pytest.mark.api
 class TestProfileValidation:

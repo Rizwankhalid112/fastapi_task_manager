@@ -3,7 +3,7 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 from zxcvbn import zxcvbn
 
 def _validate_full_name(value: str) -> str:
-    cleaned = value.strip()
+    cleaned = " ".join(value.split())
     if not cleaned.replace(" ", "").isalpha():
         raise ValueError("Full name must contain letters only.")
     return cleaned.title()

@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from app.api import auth, project, task, user
-
 app = FastAPI(title="Secure Task Management API")
 app.include_router(auth.router)
 app.include_router(user.router)

@@ -11,6 +11,12 @@ class TestLoginSuccess:
         response = await client.post("/auth/login", data=form_data)
         assert response.json().get("token_type") == "bearer"
 
+    async def test_login_returns_access_token(self, client, login_form, user):
+        form_data = login_form
+        response = await client.post("/auth/login", data=form_data)
+        assert isinstance(response.json().get("access_token"), str)
+        assert response.json().get("access_token")
+
 @pytest.mark.api
 class TestLoginValidation:
     @pytest.mark.parametrize("invalid_login_form", ["missing_password", "missing_username"], indirect=True)
@@ -30,3 +36,8 @@ class TestLoginUnauthorized:
         form_data = unknown_user_form
         response = await client.post("/auth/login", data=form_data)
         assert response.status_code == 401
+
+    async def test_login_is_case_insensitive(self, client, login_form, user):
+        form_data = {**login_form, "username": login_form["username"].upper()}
+        response = await client.post("/auth/login", data=form_data)
+        assert response.status_code == 200
