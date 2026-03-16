@@ -20,7 +20,7 @@ from app.models.task import Task
 from app.models.user import User
 from app.utils.jwt_handler import create_access_token
 from app.utils.password_handler import PasswordHandler
-from tests.factories import DEFAULT_PASSWORD
+from tests.defaults import DEFAULT_PASSWORD
 
 def _sync_database_url() -> str:
     database_url = os.environ["DATABASE_URL"]
@@ -135,6 +135,7 @@ async def truncate_db(request, async_engine):
 
 @pytest_asyncio.fixture
 async def db_session(async_session_maker):
+    """Shared async DB session for the test. Inject this in any test that needs DB access."""
     async with async_session_maker() as session:
         yield session
 

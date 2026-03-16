@@ -1,6 +1,7 @@
 .env
 .env.test
 .env.*
+tests/credentials.py
 __pycache__/
 *.py[cod]
 *$py.class
