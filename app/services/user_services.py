@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database.queries.user_queries import create_user, get_user_by_email, update_user
 from app.models.user import User
@@ -9,7 +10,10 @@ async def register_user(db: AsyncSession, user_data: UserCreate):
     existing_user = await get_user_by_email(db, email=user_data.email)
     if existing_user:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email already registered")
-    return await create_user(db=db, user_data=user_data)
+    try:
+        return await create_user(db=db, user_data=user_data)
+    except IntegrityError:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email already registered")
 
 async def authenticate_user(db: AsyncSession, email: str, password: str):
     user = await get_user_by_email(db, email=email)

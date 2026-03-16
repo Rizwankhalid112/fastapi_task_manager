@@ -179,7 +179,6 @@ class TestTasksEndToEnd:
         login_response = await client.post("/auth/login", data=login_form)
         access_token = login_response.json()["access_token"]
         headers = {"Authorization": f"Bearer {access_token}"}
-
         project_response = await client.post("/api/projects", json=project_payload, headers=headers)
         project_id = project_response.json()["id"]
         task_response = await client.post(

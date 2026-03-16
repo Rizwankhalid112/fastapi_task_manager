@@ -2,7 +2,7 @@ import pytest
 from fastapi import HTTPException
 from app.models.project import Project
 from app.models.user import User
-from app.schemas.task_schema import TaskCreate
+from app.schemas.task_schema import TaskCreate, TaskStatus
 from app.services.task_services import (
     change_task_status,
     create_task_for_project,
@@ -50,6 +50,6 @@ class TestTaskServices:
                 project_id=99999,
                 task_id=99999,
                 owner_id=user.id,
-                status_value="done",
+                status_value=TaskStatus.done,
             )
         assert exc.value.status_code == 404

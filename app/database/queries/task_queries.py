@@ -1,5 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.database.queries.project_queries import get_project_by_id_and_owner
 from app.models.project import Project
 from app.models.task import Task
 from app.schemas.task_schema import TaskCreate, TaskStatus
@@ -15,12 +16,6 @@ async def create_task(db: AsyncSession, project_id: int, task_data: TaskCreate):
     await db.commit()
     await db.refresh(task)
     return task
-
-async def get_project_by_id_and_owner(db: AsyncSession, project_id: int, owner_id: int):
-    result = await db.execute(
-        select(Project).where(Project.id == project_id, Project.owner_id == owner_id)
-    )
-    return result.scalar_one_or_none()
 
 async def get_tasks_by_project(db: AsyncSession, project_id: int):
     result = await db.execute(

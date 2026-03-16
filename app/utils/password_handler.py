@@ -14,5 +14,5 @@ class PasswordHandler:
                 plain_text_password.encode("utf-8"),
                 hashed_password.encode("utf-8"),
             )
-        except ValueError:
+        except (ValueError, TypeError):
             return False
