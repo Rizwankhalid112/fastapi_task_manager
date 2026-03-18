@@ -1,5 +1,6 @@
 import asyncio
 import os
+from pathlib import Path
 from urllib.parse import urlparse
 import asyncpg
 import pytest
@@ -11,7 +12,9 @@ from httpx import ASGITransport, AsyncClient
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.pool import NullPool
-load_dotenv(".env.test", override=True)
+
+_BACKEND_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(_BACKEND_DIR / ".env.test", override=True)
 from app.database.base import Base
 from app.database.connection import get_db
 from app.main import app
@@ -57,7 +60,7 @@ async def _reset_schema(async_engine) -> None:
         await conn.execute(text("CREATE SCHEMA public"))
 
 def _run_alembic_upgrade() -> None:
-    config = Config("alembic.ini")
+    config = Config(str(_BACKEND_DIR / "alembic.ini"))
     config.set_main_option("sqlalchemy.url", _sync_database_url())
     command.upgrade(config, "head")
 

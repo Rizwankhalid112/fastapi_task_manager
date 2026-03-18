@@ -1,97 +1,104 @@
-# Secure Task Management API
+# Secure Task Management
 
-FastAPI backend for user authentication, projects, and tasks with async SQLAlchemy, JWT auth, and clean modular structure.
-
-## Features
-1. User auth: register, login, JWT-protected routes
-2. User profile: get and update current user
-3. Projects: create, list, get, delete (owner-scoped)
-4. Tasks: create, list, update status, delete (project-scoped)
-
-## Tech Stack
-1. FastAPI + Pydantic v2
-2. SQLAlchemy 2.x (async) + asyncpg
-3. Alembic migrations
-4. JWT (python-jose)
-5. Password hashing with bcrypt
-6. Password strength via zxcvbn
+Full-stack task manager with FastAPI backend and Next.js frontend.
 
 ## Project Structure
+
 ```
-app/
-  api/            # Route handlers
-  database/       # DB engine/session + Alembic metadata base
-  database/queries/  # DB query layer
-  models/         # SQLAlchemy models
-  schemas/        # Pydantic schemas
-  services/       # Business logic
-  utils/          # JWT + current-user dependency
-alembic/          # Migrations
+fastapi_task_manager/
+├── backend/          # FastAPI API, migrations, tests
+│   ├── app/
+│   ├── alembic/
+│   ├── tests/
+│   ├── alembic.ini
+│   ├── requirements.txt
+│   └── pytest.ini
+└── frontend/         # Next.js app
 ```
 
-## Setup
+## Backend (FastAPI)
+
+### Setup
+
 1. Create and activate a virtual environment.
 2. Install dependencies:
+
 ```bash
+cd backend
 pip install -r requirements.txt
 ```
 
-## Environment
-Create `.env` at project root:
+3. Create environment files in the `backend/` folder (they are not in git):
+
+```bash
+cd backend
+cp .env.example .env
+cp .env.example .env.test
+```
+
+Edit `backend/.env` and `backend/.env.test` with your credentials. Both use the same format; use a separate test database for `.env.test`:
+
 ```
 DATABASE_URL=postgresql+asyncpg://USER:PASSWORD@HOST:PORT/DB_NAME
-SECRET_KEY=your_secret
+SECRET_KEY=your_secret_at_least_32_characters_long
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-## Migrations
-Run migrations before starting the API:
+### Migrations
+
 ```bash
+cd backend
 alembic upgrade head
 ```
 
-## Run Server
+### Run Server
+
 ```bash
+cd backend
 uvicorn app.main:app --reload
 ```
 
-Open Swagger UI:
-```
-http://127.0.0.1:8000/docs
-```
+API docs: http://127.0.0.1:8000/docs
 
-## Auth Flow (JWT)
-1. `POST /auth/register`
-2. `POST /auth/login` → get `access_token`
-3. Use header:
-```
-Authorization: Bearer <token>
+### Run Tests
+
+```bash
+cd backend
+pytest
 ```
 
-## Endpoints
+## Frontend (Next.js)
 
-### Auth
-1. `POST /auth/register`
-2. `POST /auth/login`
+### Setup
 
-### Users
-1. `GET /users/me`
-2. `PATCH /users/me`
+```bash
+cd frontend
+npm install
+```
 
-### Projects (owner-only)
-1. `POST /api/projects`
-2. `GET /api/projects`
-3. `GET /api/projects/{id}`
-4. `DELETE /api/projects/{id}`
+### Environment (optional)
 
-### Tasks (project-scoped)
-1. `POST /api/projects/{project_id}/tasks`
-2. `GET /api/projects/{project_id}/tasks`
-3. `PATCH /api/projects/{project_id}/tasks/{task_id}`
-4. `DELETE /api/projects/{project_id}/tasks/{task_id}`
+Create `frontend/.env.local` to override the API URL:
 
-## Notes
-1. All protected endpoints require JWT in the Authorization header.
-2. Project and task access is scoped to the current user.
+```
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+```
 
+Default is `http://127.0.0.1:8000`. Run the backend before using the app.
+
+### Run Dev Server
+
+```bash
+cd frontend
+npm run dev
+```
+
+Open http://localhost:3000
+
+## Features
+
+- **Auth:** Register, login, JWT-protected routes
+- **Profile:** Get and update current user
+- **Projects:** Create, list, get, delete (owner-scoped)
+- **Tasks:** Create, list, update status, delete (project-scoped)
