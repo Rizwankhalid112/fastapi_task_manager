@@ -135,7 +135,6 @@ async def truncate_db(request, async_engine):
 
 @pytest_asyncio.fixture
 async def db_session(async_session_maker):
-    """Shared async DB session for the test. Inject this in any test that needs DB access."""
     async with async_session_maker() as session:
         yield session
 
