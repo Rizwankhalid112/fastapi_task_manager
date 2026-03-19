@@ -23,13 +23,20 @@ fastapi_task_manager/
 
 ## Docker (recommended)
 
-Run the full stack with PostgreSQL, backend, and frontend:
+Run the full stack with PostgreSQL, backend, and frontend. No local Python or Node setup required.
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Quick start
 
 ```bash
 docker compose up --build
 ```
 
-First run takes a few minutes to build. Then:
+First run takes a few minutes to build images. Then:
 
 1. **Run migrations** (in a second terminal while containers are running):
 
@@ -42,6 +49,16 @@ docker compose exec backend alembic upgrade head
    - Backend API: http://localhost:8000
    - API docs: http://localhost:8000/docs
 
+### Services
+
+| Service  | Port | Description                    |
+|----------|------|--------------------------------|
+| frontend | 3000 | Next.js app                    |
+| backend  | 8000 | FastAPI API                    |
+| db       | 5432 | PostgreSQL 15 (internal only) |
+
+Default credentials: `rizwan` / `secret123`, database `taskflow`. Override `BACKEND_SECRET_KEY` via environment if needed.
+
 ### Useful commands
 
 | Command | Description |
@@ -51,6 +68,14 @@ docker compose exec backend alembic upgrade head
 | `docker compose down -v` | Stop and remove database volume |
 | `docker compose logs backend` | View backend logs |
 | `docker compose exec backend bash` | Shell into backend container |
+| `docker compose exec backend pytest` | Run backend tests |
+| `docker compose up --build backend` | Rebuild backend after `requirements.txt` changes |
+
+### Troubleshooting
+
+- **Port 5432 already in use:** Stop local PostgreSQL (`sudo systemctl stop postgresql`) or change the db port in `docker-compose.yml` (e.g. `"5433:5432"`).
+- **Port 8000 or 3000 in use:** Stop any local FastAPI or Next.js processes.
+- **Changes not reflecting:** Code changes apply via volume mounts. Rebuild after changing `requirements.txt` or `package.json`: `docker compose up --build backend` or `docker compose up --build frontend`.
 
 ## Backend (FastAPI)
 
