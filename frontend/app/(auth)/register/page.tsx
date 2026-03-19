@@ -5,14 +5,14 @@ import { ROUTES } from "@/lib/constants";
 export default function RegisterPage() {
   return (
     <div
-      className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden flex"
+      className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden flex flex-col lg:flex-row min-w-0"
       style={{
         border: "1px solid rgba(255,255,255,0.10)",
         boxShadow: "0 25px 60px rgba(0,0,0,0.5)",
       }}
     >
       <div
-        className="hidden lg:flex flex-col justify-between w-[42%] flex-shrink-0 p-10"
+        className="hidden lg:flex flex-col justify-between flex-shrink-0 lg:w-2/5 lg:max-w-xs p-6 lg:p-10"
         style={{
           background: "linear-gradient(135deg, rgba(124,111,255,0.12), rgba(78,205,196,0.06))",
           borderRight: "1px solid rgba(255,255,255,0.08)",
@@ -31,7 +31,7 @@ export default function RegisterPage() {
           >
             ✦ Trusted by 12k+ teams
           </span>
-          <h2 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-[-2px] mb-6">
+          <h2 className="font-heading text-3xl font-extrabold leading-[1.1] tracking-[-2px] mb-6">
             <span className="text-white">Your work.</span>
             <br />
             <span style={{ color: "#7C6FFF" }}>Organized.</span>
@@ -65,9 +65,9 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      <div className="flex-1 p-10" style={{ background: "#13131A" }}>
-        <div className="mb-8">
-          <h1 className="font-heading text-3xl font-extrabold text-white tracking-[-1.5px]">
+      <div className="flex-1 p-4 sm:p-6 lg:p-10 min-w-0" style={{ background: "#13131A" }}>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-white tracking-[-1.5px]">
             Create your account
           </h1>
           <p className="text-sm mt-2" style={{ color: "#8888AA" }}>
@@ -106,7 +106,7 @@ export default function RegisterPage() {
             borderColor: "rgba(255,255,255,0.10)",
           }}
         >
-          <svg className="w-5 h-5" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />

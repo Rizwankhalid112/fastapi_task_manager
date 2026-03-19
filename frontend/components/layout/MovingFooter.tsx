@@ -35,7 +35,7 @@ export function MovingFooter() {
         </div>
       </div>
       <div className="border-t border-white/10 py-6 px-4">
-        <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-4">
+        <div className="mx-auto w-full max-w-6xl flex flex-col sm:flex-row flex-wrap items-center justify-between gap-4 min-w-0 px-4">
           <Link
             href={ROUTES.HOME}
             className="font-heading font-semibold text-[#7C6FFF]"
@@ -45,7 +45,7 @@ export function MovingFooter() {
           <p className="text-sm text-gray-400" suppressHydrationWarning>
             © {new Date().getFullYear()} TaskFlow. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-sm text-gray-400">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 text-sm text-gray-400">
             <Link href="#" className="hover:text-white transition-colors">
               Privacy
             </Link>

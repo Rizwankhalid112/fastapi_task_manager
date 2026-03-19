@@ -45,7 +45,7 @@ export function ProjectList() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center gap-2">
         <h2 className="text-xl font-semibold">Projects</h2>
         <Button onClick={() => setModalOpen(true)}>New project</Button>
       </div>
@@ -57,7 +57,7 @@ export function ProjectList() {
           No projects yet. Create one to get started.
         </p>
       ) : (
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects.map((project) => (
             <li key={project.id}>
               <ProjectCard

@@ -41,7 +41,7 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
         aria-modal="true"
         aria-labelledby={title ? "modal-title" : undefined}
         className={cn(
-          "relative z-10 w-full max-w-md rounded-xl bg-[#252530] text-white shadow-xl max-h-[90vh] overflow-auto",
+          "relative z-10 w-full max-w-md rounded-xl bg-[#252530] text-white shadow-xl max-h-[90vh] overflow-auto min-w-0",
           className
         )}
       >

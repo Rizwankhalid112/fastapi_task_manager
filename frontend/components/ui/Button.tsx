@@ -22,7 +22,7 @@ export function Button({
     <button
       type="button"
       className={cn(
-        "inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+        "inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none w-full sm:w-auto",
         variant === "primary" &&
           "bg-[#7C6FFF] text-white hover:bg-[#6B5FEE] focus:ring-[#7C6FFF]",
         variant === "secondary" &&

@@ -8,7 +8,7 @@ export default function DashboardPage() {
       <p className="text-gray-400">
         Welcome. Manage your projects and tasks from here.
       </p>
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-4">
         <Link
           href={ROUTES.PROJECTS}
           className="rounded-lg border border-white/10 bg-[#252530] px-4 py-3 text-sm font-medium hover:bg-white/10"

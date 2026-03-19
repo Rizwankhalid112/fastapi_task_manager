@@ -50,7 +50,7 @@ export default function ProjectTasksPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4">
         <Link
           href={ROUTES.PROJECTS}
           className="text-sm text-blue-600 hover:underline"

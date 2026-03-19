@@ -1,7 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -30,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body suppressHydrationWarning
-        className={`${outfit.variable} ${inter.variable} font-sans antialiased bg-[#1A1A24] text-white`}
+        className={`${outfit.variable} ${inter.variable} font-sans antialiased bg-[#1A1A24] text-white overflow-x-hidden`}
       >
         <AuthProvider>{children}</AuthProvider>
       </body>

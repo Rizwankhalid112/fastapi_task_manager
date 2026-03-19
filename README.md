@@ -6,15 +6,51 @@ Full-stack task manager with FastAPI backend and Next.js frontend.
 
 ```
 fastapi_task_manager/
+├── docker-compose.yml
 ├── backend/          # FastAPI API, migrations, tests
 │   ├── app/
 │   ├── alembic/
 │   ├── tests/
+│   ├── Dockerfile
+│   ├── .dockerignore
 │   ├── alembic.ini
 │   ├── requirements.txt
 │   └── pytest.ini
 └── frontend/         # Next.js app
+    ├── Dockerfile
+    └── .dockerignore
 ```
+
+## Docker (recommended)
+
+Run the full stack with PostgreSQL, backend, and frontend:
+
+```bash
+docker compose up --build
+```
+
+First run takes a few minutes to build. Then:
+
+1. **Run migrations** (in a second terminal while containers are running):
+
+```bash
+docker compose exec backend alembic upgrade head
+```
+
+2. **Access the app:**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - API docs: http://localhost:8000/docs
+
+### Useful commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all containers |
+| `docker compose down -v` | Stop and remove database volume |
+| `docker compose logs backend` | View backend logs |
+| `docker compose exec backend bash` | Shell into backend container |
 
 ## Backend (FastAPI)
 

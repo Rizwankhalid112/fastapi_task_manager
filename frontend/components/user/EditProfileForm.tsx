@@ -57,7 +57,7 @@ export function EditProfileForm({ onSuccess, onCancel }: EditProfileFormProps) {
         minLength={password ? 8 : undefined}
       />
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <div className="flex gap-2 justify-end">
+      <div className="flex flex-wrap gap-2 justify-end">
         <Button type="button" variant="secondary" onClick={onCancel}>
           Cancel
         </Button>

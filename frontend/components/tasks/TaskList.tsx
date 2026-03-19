@@ -67,7 +67,7 @@ export function TaskList({ projectId }: TaskListProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center gap-2">
         <h2 className="text-xl font-semibold">Tasks</h2>
         <Button onClick={() => setModalOpen(true)}>New task</Button>
       </div>
@@ -79,7 +79,7 @@ export function TaskList({ projectId }: TaskListProps) {
           No tasks yet. Create one to get started.
         </p>
       ) : (
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {tasks.map((task) => (
             <li key={task.id}>
               <TaskCard

@@ -90,14 +90,14 @@ const TASKS = [
 export default function PublicHomePage() {
   return (
     <>
-      <section className="relative mx-auto max-w-6xl px-6 pt-20 pb-28 lg:pt-28 lg:pb-36 overflow-hidden">
+      <section className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 pt-16 sm:pt-20 pb-20 sm:pb-28 lg:pt-28 lg:pb-36 overflow-hidden min-w-0">
 
-        <div className="pointer-events-none absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full blur-[120px]"
+        <div className="pointer-events-none absolute -top-40 -left-40 w-64 sm:w-80 lg:w-[500px] h-64 sm:h-80 lg:h-[500px] rounded-full blur-[120px]"
           style={{ background: "rgba(124,111,255,0.14)" }} />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 w-[400px] h-[400px] rounded-full blur-[100px]"
+        <div className="pointer-events-none absolute -bottom-20 -right-20 w-52 sm:w-72 lg:w-[400px] h-52 sm:h-72 lg:h-[400px] rounded-full blur-[100px]"
           style={{ background: "rgba(78,205,196,0.12)" }} />
 
-        <div className="relative grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-20 items-center">
 
           <div>
             <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium text-[#4ECDC4] mb-8 tracking-wide"
@@ -106,7 +106,7 @@ export default function PublicHomePage() {
               Now with AI-powered task suggestions
             </span>
 
-            <h1 className="font-['Syne'] text-5xl lg:text-6xl font-extrabold leading-[1.06] tracking-[-2.5px] mb-6">
+            <h1 className="font-['Syne'] text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.06] tracking-[-2.5px] mb-6">
               <span className="text-white">Manage tasks.</span><br />
               <span className="text-[#7C6FFF]">Ship faster.</span><br />
               <span className="text-[#4ECDC4]">Stay focused.</span>
@@ -127,7 +127,7 @@ export default function PublicHomePage() {
               </Button>
             </div>
 
-            <div className="flex gap-8 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}>
+            <div className="flex flex-wrap gap-6 sm:gap-8 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}>
               {[{ num: "12k+", label: "Active teams" }, { num: "98%", label: "Satisfaction rate" }, { num: "4.9★", label: "Average rating" }].map((s) => (
                 <div key={s.label}>
                   <p className="font-['Syne'] text-2xl font-bold text-white">{s.num}</p>
@@ -137,8 +137,8 @@ export default function PublicHomePage() {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="rounded-2xl p-5"
+          <div className="relative min-w-0 overflow-x-auto">
+            <div className="rounded-2xl p-4 sm:p-5 min-w-0"
               style={{ background: "#13131A", border: "1px solid rgba(255,255,255,0.10)", boxShadow: "0 25px 60px rgba(124,111,255,0.15)" }}>
 
               <div className="flex items-center justify-between mb-5">
@@ -150,7 +150,7 @@ export default function PublicHomePage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3 mb-5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
                 {[
                   { val: "24",  label: "Active tasks", change: "↑ 3 today", pos: true },
                   { val: "6",   label: "Projects",     change: "↑ 1 new",   pos: true },
@@ -210,7 +210,7 @@ export default function PublicHomePage() {
 
       <section id="features" className="scroll-mt-20 py-24 lg:py-32"
         style={{ background: "rgba(19,19,26,0.80)", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[3px] text-[#7C6FFF] mb-3">Why TaskFlow</p>
           <h2 className="font-['Syne'] text-4xl lg:text-5xl font-extrabold text-white tracking-[-2px] mb-4">
             Everything your team needs
@@ -219,7 +219,7 @@ export default function PublicHomePage() {
             From solo developers to large teams — TaskFlow adapts to how you work, not the other way around.
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map((f, i) => (
               <div key={i}
                 className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-[#1C1C27] cursor-default bg-[#13131A]"
@@ -238,7 +238,7 @@ export default function PublicHomePage() {
       </section>
 
       <section id="projects" className="scroll-mt-20 py-24 lg:py-32">
-        <div className="mx-auto max-w-6xl px-6 text-center">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 text-center min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[3px] text-[#4ECDC4] mb-3">Projects</p>
           <h2 className="font-['Syne'] text-4xl lg:text-5xl font-extrabold text-white tracking-[-2px] mb-4">
             Organize work your way
@@ -254,14 +254,14 @@ export default function PublicHomePage() {
 
       <section id="pricing" className="scroll-mt-20 py-24 lg:py-32"
         style={{ background: "rgba(19,19,26,0.80)", borderTop: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[3px] text-[#7C6FFF] mb-3">Pricing</p>
           <h2 className="font-['Syne'] text-4xl lg:text-5xl font-extrabold text-white tracking-[-2px] mb-4">
             Simple, transparent pricing
           </h2>
           <p className="text-[#8888AA] text-base mb-16">No hidden fees. Cancel anytime.</p>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PRICING_PLANS.map((plan, i) => (
               <div key={i} className="relative rounded-2xl p-7 flex flex-col"
                 style={{
@@ -270,7 +270,7 @@ export default function PublicHomePage() {
                   boxShadow: plan.popular ? "0 8px 32px rgba(124,111,255,0.15)" : "none",
                 }}>
                 {plan.popular && (
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-semibold text-white tracking-wide whitespace-nowrap"
+                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-semibold text-white tracking-wide whitespace-normal sm:whitespace-nowrap text-center"
                     style={{ background: "#7C6FFF" }}>
                     Most popular
                   </span>
@@ -312,7 +312,7 @@ export default function PublicHomePage() {
       </section>
 
       <section id="about" className="scroll-mt-20 py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+        <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 text-center min-w-0">
           <h2 className="font-['Syne'] text-3xl font-bold text-white tracking-[-1px] mb-4">About TaskFlow</h2>
           <p className="text-[#8888AA] text-base leading-relaxed">
             TaskFlow is a modern task manager built for teams who move fast.
