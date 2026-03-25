@@ -4,6 +4,9 @@ Revision ID: 21a1e02897c7
 Revises: 6d7b8f1a2c34
 Create Date: 2026-03-09 18:44:34.404307
 
+No-op revision: keeps a linear Alembic chain when an autogenerate run produced an empty
+upgrade after `6d7b8f1a2c34` already created `projects`. Safe to leave as-is.
+
 """
 from typing import Sequence, Union
 
