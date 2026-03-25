@@ -5,11 +5,17 @@ from app.config import settings
 class Base(DeclarativeBase):
     pass
 
+def _normalize_asyncpg_url(url: str) -> str:
+    if url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    url = url.replace("sslmode=require", "ssl=require")
+    url = url.replace("&channel_binding=require", "").replace("?channel_binding=require", "")
+    return url
+
+
 def _build_engine():
     try:
-        database_url = settings.DATABASE_URL
-        if database_url.startswith("postgresql://"):
-            database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        database_url = _normalize_asyncpg_url(settings.DATABASE_URL)
         return create_async_engine(
             database_url,
             echo=False,

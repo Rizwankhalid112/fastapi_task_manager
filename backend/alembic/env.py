@@ -25,8 +25,11 @@ target_metadata = Base.metadata
 # Keep database credentials in .env, not alembic.ini.
 alembic_url = (
     settings.DATABASE_URL
-    .replace("postgresql+asyncpg://", "postgresql+psycopg2://")
+    .replace("postgresql+asyncpg://", "postgresql://")
+    .replace("postgresql://", "postgresql+psycopg2://", 1)
     .replace("ssl=require", "sslmode=require")
+    .replace("&channel_binding=require", "")
+    .replace("?channel_binding=require", "")
 )
 config.set_main_option("sqlalchemy.url", alembic_url)
 
